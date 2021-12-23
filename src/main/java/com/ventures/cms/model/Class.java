@@ -13,8 +13,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "class")
 public class Class implements Serializable {
@@ -27,8 +25,8 @@ public class Class implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "teacher_id", nullable = true)
+	@ManyToOne
+	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 
 	public Long getId() {
@@ -46,7 +44,7 @@ public class Class implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -57,7 +55,7 @@ public class Class implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Class [id=" + id + ", namessssss=" + name + ", teacher=" + teacher + "]";
+		return "Class [id=" + id + ", namessssss=" + name + "]";
 	}
 
 }

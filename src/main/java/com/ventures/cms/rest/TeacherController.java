@@ -3,6 +3,7 @@ package com.ventures.cms.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,10 @@ public class TeacherController {
 	public ResponseEntity<Teacher> create(@RequestBody Teacher teacher) {
 		teacherService.createTeacher(teacher);
 		return new ResponseEntity<Teacher>(HttpStatus.OK);
+	}
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Teacher> get(@PathVariable Long id) {
+		return new ResponseEntity<Teacher>(teacherService.getTeacher(id), HttpStatus.OK);
 	}
 
 }

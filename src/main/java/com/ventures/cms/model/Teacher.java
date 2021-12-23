@@ -1,6 +1,7 @@
 package com.ventures.cms.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,8 +18,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 @Table(name = "teacher")
@@ -36,8 +36,8 @@ public class Teacher implements Serializable {
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Address address;
 
-	@OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Class> classes;
+	@OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER)
+	private List<Class> classes = new ArrayList<>();;
 
 	@OneToOne
 	private Department department;
@@ -87,7 +87,15 @@ public class Teacher implements Serializable {
 		return classes;
 	}
 
-	public void setClassid(List<Class> classes) {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setClasses(List<Class> classes) {
 		this.classes = classes;
 	}
 
@@ -110,6 +118,6 @@ public class Teacher implements Serializable {
 	@Override
 	public String toString() {
 		return "Teacher [title=" + title + ", name=" + name + ", gender=" + gender + ", age=" + age + ", address="
-				+ address + ", classes=" + classes + ", salary=" + salary + ", department=" + department + "]";
+				+ address + ", salary=" + salary + ", department=" + department + "]";
 	}
 }

@@ -17,7 +17,8 @@ public class StudentService {
 	}
 	
 	public Student getStudent(Long regNo) {
-		return studentRepository.getById(regNo);
+		Student s = studentRepository.getById(regNo);
+		return s;
 	}
 
 }
