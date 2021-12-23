@@ -20,7 +20,6 @@ public class DepartmentController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Department> create(@RequestBody Department dept) {
-		departmentService.createDepartment(dept);
-		return new ResponseEntity<Department>(HttpStatus.OK);
+		return new ResponseEntity<Department>(departmentService.createDepartment(dept), HttpStatus.OK);
 	}
 }

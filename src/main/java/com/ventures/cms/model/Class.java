@@ -27,8 +27,8 @@ public class Class implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "teacher_id", nullable = false)
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "teacher_id", nullable = true)
 	private Teacher teacher;
 
 	public Long getId() {

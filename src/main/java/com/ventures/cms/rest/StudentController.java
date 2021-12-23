@@ -21,11 +21,10 @@ public class StudentController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Student> create(@RequestBody Student student) {
-		studentService.createStudent(student);
-		return new ResponseEntity<Student>(HttpStatus.OK);
+		return new ResponseEntity<Student>(studentService.createStudent(student),HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Student> get(@PathVariable Long id) {
 		return new ResponseEntity<Student>(studentService.getStudent(id), HttpStatus.OK);
 	}
