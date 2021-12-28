@@ -22,8 +22,7 @@ public class TeacherController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Teacher> create(@RequestBody Teacher teacher) {
-		teacherService.createTeacher(teacher);
-		return new ResponseEntity<Teacher>(HttpStatus.OK);
+		return new ResponseEntity<Teacher>(teacherService.createTeacher(teacher), HttpStatus.OK);
 	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Teacher> get(@PathVariable Long id) {

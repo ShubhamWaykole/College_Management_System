@@ -1,5 +1,7 @@
 package com.ventures.cms.rest;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,27 @@ public class StudentController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Student> create(@RequestBody Student student) {
-		return new ResponseEntity<Student>(studentService.createStudent(student),HttpStatus.OK);
+		Student stu = null;
+		try {
+			stu = studentService.createStudent(student);
+		} catch (Exception e) {
+			System.out.println("Exception caught while creating student: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Student>(stu, HttpStatus.CREATED);
+
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Student> get(@PathVariable Long id) {
-		return new ResponseEntity<Student>(studentService.getStudent(id), HttpStatus.OK);
+		Student stu;
+		try {
+			stu = studentService.getStudent(id);
+		} catch (EntityNotFoundException e) {
+			System.out.println("Exception caught while fetching student details|: " + e.getMessage());
+			e.printStackTrace();
+			return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Student>(stu, HttpStatus.OK);
 	}
-
 }

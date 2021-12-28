@@ -21,8 +21,7 @@ public class ClassController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Class> create(@RequestBody Class cls) {
-		classService.createClass(cls);
-		return new ResponseEntity<Class>(HttpStatus.OK);
+		return new ResponseEntity<Class>(classService.createClass(cls), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
