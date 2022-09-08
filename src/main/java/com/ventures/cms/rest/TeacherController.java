@@ -20,7 +20,7 @@ public class TeacherController {
 	@Autowired
 	TeacherService teacherService;
 
-// huuhuh
+	// request mapping 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<Teacher> create(@RequestBody Teacher teacher) {
 		return new ResponseEntity<Teacher>(teacherService.createTeacher(teacher), HttpStatus.OK);
