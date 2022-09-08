@@ -27,7 +27,7 @@ public class StudentController {
 		try {
 			stu = studentService.createStudent(student);
 		} catch (Exception e) {
-			System.out.println("Exception caught while creating student: " + e.getMessage());
+			System.out.println("Exception caught while creating the student: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return new ResponseEntity<Student>(stu, HttpStatus.CREATED);
